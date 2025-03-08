@@ -2,9 +2,11 @@ package com.diarreatracker
 
 import android.content.Context
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.diarreatracker.ui.GanglineAdapter
+import com.diarreatracker.ui.TeamBuilderDogAdapter
 import com.example.diarreatracker.R
 
 class TeamBuilderScreenManager(
@@ -19,9 +21,15 @@ class TeamBuilderScreenManager(
 
     }
 
+    private val dogRecycler = layout.rootView.findViewById<RecyclerView>(R.id.teamBuilderDogRecycler)
+    private val dogRecyclerManager = GridLayoutManager(context, 5)
+
     fun initialize(){
         gangline.layoutManager = ganglineManager
         gangline.adapter = GanglineAdapter(5)
+        dogRecycler.layoutManager = dogRecyclerManager
+        dogRecycler.adapter = TeamBuilderDogAdapter(100)
+
 
 
     }
