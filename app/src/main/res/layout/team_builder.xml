@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/dark_mode_background">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTeamBuilderV05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineTeamBuilderV40"
@@ -12,11 +23,162 @@
         app:layout_constraintGuide_percent="0.40" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTeamBuilderV50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTeamBuilderV60"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.60" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineTeamBuilderV70"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.70" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTeamBuilderV85"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTeamBuilderH06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.06" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTeamBuilderH15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTeamBuilderH70"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.70" />
+
+    <ImageView
+        android:id="@+id/teamBuilderSearchIcon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineTeamBuilderH06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guidelineTeamBuilderV05"
+        android:src="@android:drawable/ic_menu_search" />
+
+    <EditText
+        android:id="@+id/teamBuilderSearchText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ems="15"
+        android:hint="Dog Name"
+        android:inputType="text"
+        android:text="Search"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineTeamBuilderH06"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineTeamBuilderV40"
+        app:layout_constraintStart_toEndOf="@+id/teamBuilderSearchIcon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/teamBuilderDogRecycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guidelineTeamBuilderV40"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineTeamBuilderH06"
+        app:layout_constraintBottom_toBottomOf="parent"
+ />
+
+    <Button
+        android:id="@+id/teamBuilderViewOnMapButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View On Map"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineTeamBuilderV40"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintStart_toEndOf="@id/guidelineTeamBuilderV50"
+        app:layout_constraintEnd_toStartOf="@id/guidelineTeamBuilderV60"
+        app:layout_constraintTop_toBottomOf="@id/guidelineTeamBuilderH70"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <include layout="@layout/teambuilder_sled"/>
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guidelineTeamBuilderH70"
+        app:layout_constraintStart_toEndOf="@id/guidelineTeamBuilderV40"
+        app:layout_constraintEnd_toStartOf="@id/guidelineTeamBuilderV70"
+        />
+
+    <TextView
+        android:id="@+id/teamBuilderCurrentTour"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Current Tour Here"
+        android:autoSizeTextType="uniform"
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="1049dp"
+        tools:layout_editor_absoluteY="27dp"
+
+        app:layout_constraintStart_toEndOf="@id/guidelineTeamBuilderV70"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guidelineTeamBuilderH06"/>
+
+    <Button
+        android:id="@+id/teamBuilderNewTeamButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="New Team"
+
+
+        app:layout_constraintTop_toBottomOf="@id/guidelineTeamBuilderH06"
+        app:layout_constraintBottom_toTopOf="@id/guidelineTeamBuilderH15"
+        app:layout_constraintStart_toEndOf="@id/guidelineTeamBuilderV70"
+        app:layout_constraintEnd_toStartOf="@id/guidelineTeamBuilderV85" />
+
+    <Button
+        android:id="@+id/teamBuilderSelectTourButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Select Tour"
+
+
+        app:layout_constraintTop_toBottomOf="@id/guidelineTeamBuilderH06"
+        app:layout_constraintBottom_toTopOf="@id/guidelineTeamBuilderH15"
+        app:layout_constraintStart_toEndOf="@id/guidelineTeamBuilderV85"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <!-- <include layout="@layout/teambuilder_sled"/> -->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

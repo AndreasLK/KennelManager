@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_mode_background"
+    >
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/SledH15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/SledH165"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.165" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/SledH60"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.60" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/SledH985"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.985" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/SledV03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.03" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/SledV97"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.97" />
+
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/dog1"
+
+        app:layout_constraintTop_toBottomOf="@id/SledH15"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/sledSeatNumberText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:autoSizeTextType="uniform"
+        android:text="Seats: 2+2"
+        android:textColor="@color/white"
+        android:background="@color/dark_mode_background"
+        android:textAlignment="center"
+
+
+        app:layout_constraintStart_toEndOf="@id/SledV03"
+        app:layout_constraintEnd_toStartOf="@id/SledV97"
+        app:layout_constraintTop_toBottomOf="@id/SledH165"
+        app:layout_constraintBottom_toTopOf="@id/SledH60"
+ />
+
+    <TextView
+        android:id="@+id/sledDogAmountText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:autoSizeTextType="uniform"
+        android:text="X Dogs"
+        android:textColor="@color/white"
+        android:background="@color/dark_mode_background"
+        android:textAlignment="center"
+
+
+        app:layout_constraintStart_toEndOf="@id/SledV03"
+        app:layout_constraintEnd_toEndOf="@id/SledV97"
+        app:layout_constraintTop_toBottomOf="@id/SledH60"
+        app:layout_constraintBottom_toBottomOf="@id/SledH985"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

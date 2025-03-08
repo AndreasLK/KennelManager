@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setFreeFlowScreen(permissionLevel)
+        setTeamBuilderScreen(permissionLevel)
     }
 
     inner class ScaleHolder{
@@ -65,6 +65,12 @@ class MainActivity : ComponentActivity() {
         // Initialize FreeFlowScreenManager
         val freeFlowScreenManager = FreeFlowScreenManager(this, zoomableLayout, fileHandler, scaleHolder, permissionLevel)
         freeFlowScreenManager.initialize()
+    }
+
+    private fun setTeamBuilderScreen(permissionLevel: Boolean){
+        if (permissionLevel) {
+            setContentView(R.layout.team_builder)
+        }
     }
 
     private fun sha256(input: String): String{

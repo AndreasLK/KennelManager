@@ -56,7 +56,6 @@ class CustomTextView : androidx.appcompat.widget.AppCompatTextView {
         // Get the value for rowName
         rowName = typedArray.getString(R.styleable.CustomTextView_rowName) ?: "Not Assigned" // Default value
 
-        // Don't forget to recycle the typed array
         typedArray.recycle()
     }
 

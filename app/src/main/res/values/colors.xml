@@ -11,4 +11,10 @@
     <color name="dog_view_standard">#1E7DEB</color>
     <color name="dog_view_heat">#851D2D</color>
     <color name="dark_mode_background">#171718</color>
+    <color name="dog1">#4CD02E</color>
+    <color name="dog2">#74D02E</color>
+    <color name="dog3">#9DD02E</color>
+    <color name="dog4">#D0BA2E</color>
+    <color name="dog5">#D0842E</color>
+    <color name="dog6">#D02E2E</color>
 </resources>
