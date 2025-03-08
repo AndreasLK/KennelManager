@@ -45,21 +45,28 @@ class FreeFlowScreenManager(
             true
         }
 
+
+        val addButton = zoomableLayout.rootView.findViewById<Button>(R.id.add_element_button)
+        val removeButton = zoomableLayout.rootView.findViewById<Button>(R.id.remove_element_button)
+        val saveButton = zoomableLayout.rootView.findViewById<Button>(R.id.save_state_button)
+        val loadButton = zoomableLayout.rootView.findViewById<Button>(R.id.load_state_button)
+
+
         // Button Listeners for dynamic view management
-        zoomableLayout.rootView.findViewById<Button>(R.id.add_element_button).setOnClickListener {
+        addButton.setOnClickListener {
             viewManager.addView()
         }
 
-        zoomableLayout.rootView.findViewById<Button>(R.id.remove_element_button).setOnClickListener {
+        removeButton.setOnClickListener {
             viewManager.removeLastView()
         }
 
-        zoomableLayout.rootView.findViewById<Button>(R.id.save_state_button).setOnClickListener {
+        saveButton.setOnClickListener {
             viewManager.saveViewStates()
             Toast.makeText(context, "SAVED", Toast.LENGTH_SHORT).show()
         }
 
-        zoomableLayout.rootView.findViewById<Button>(R.id.load_state_button).setOnClickListener {
+        loadButton.setOnClickListener {
             viewManager.addViewFromStorage()
             Toast.makeText(context, "LOADED", Toast.LENGTH_SHORT).show()
         }
@@ -72,10 +79,19 @@ class FreeFlowScreenManager(
             adminTextTop.visibility = View.VISIBLE
             adminTextBottom.visibility = View.VISIBLE
             adminImage.visibility = View.VISIBLE
+            addButton.visibility = View.VISIBLE
+            removeButton.visibility = View.VISIBLE
+            saveButton.visibility = View.VISIBLE
+            loadButton.visibility = View.VISIBLE
+
         }else{
             adminTextTop.visibility = View.INVISIBLE
             adminTextBottom.visibility = View.INVISIBLE
             adminImage.visibility = View.INVISIBLE
+            addButton.visibility = View.INVISIBLE
+            removeButton.visibility = View.INVISIBLE
+            saveButton.visibility = View.INVISIBLE
+            loadButton.visibility = View.VISIBLE
         }
 
 

@@ -70,7 +70,13 @@ class MainActivity : ComponentActivity() {
     private fun setTeamBuilderScreen(permissionLevel: Boolean){
         if (permissionLevel) {
             setContentView(R.layout.team_builder)
+            val layout = findViewById<ConstraintLayout>(R.id.teamBuilderConstraintLayout)
+
+            val teamBuilderScreenManager = TeamBuilderScreenManager(this, layout)
+            teamBuilderScreenManager.initialize()
         }
+
+
     }
 
     private fun sha256(input: String): String{

@@ -8,25 +8,18 @@
     >
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/SledH15"
+        android:id="@+id/SledH015"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
+        app:layout_constraintGuide_percent="0.015" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/SledH165"
+        android:id="@+id/SledH50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.165" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/SledH60"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.60" />
+        app:layout_constraintGuide_percent="0.50" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/SledH985"
@@ -55,7 +48,7 @@
         android:layout_height="0dp"
         android:background="@color/dog1"
 
-        app:layout_constraintTop_toBottomOf="@id/SledH15"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,8 +58,9 @@
         android:id="@+id/sledSeatNumberText"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:autoSizeTextType="uniform"
         android:text="Seats: 2+2"
+        android:elegantTextHeight="true"
+        android:textSize="20sp"
         android:textColor="@color/white"
         android:background="@color/dark_mode_background"
         android:textAlignment="center"
@@ -74,15 +68,16 @@
 
         app:layout_constraintStart_toEndOf="@id/SledV03"
         app:layout_constraintEnd_toStartOf="@id/SledV97"
-        app:layout_constraintTop_toBottomOf="@id/SledH165"
-        app:layout_constraintBottom_toTopOf="@id/SledH60"
+        app:layout_constraintTop_toBottomOf="@id/SledH015"
+        app:layout_constraintBottom_toTopOf="@id/SledH50"
  />
 
     <TextView
         android:id="@+id/sledDogAmountText"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:autoSizeTextType="uniform"
+        android:elegantTextHeight="true"
+        android:textSize="20sp"
         android:text="X Dogs"
         android:textColor="@color/white"
         android:background="@color/dark_mode_background"
@@ -91,7 +86,7 @@
 
         app:layout_constraintStart_toEndOf="@id/SledV03"
         app:layout_constraintEnd_toEndOf="@id/SledV97"
-        app:layout_constraintTop_toBottomOf="@id/SledH60"
+        app:layout_constraintTop_toBottomOf="@id/SledH50"
         app:layout_constraintBottom_toBottomOf="@id/SledH985"
         />
 

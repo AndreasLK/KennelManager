@@ -25,6 +25,11 @@ class dogViewAdapter(
     private val context: Context
     ): RecyclerView.Adapter<dogViewAdapter.ListViewHolder>()  {
 
+
+    private fun Boolean.toInt() = if (this) 1 else 0
+    private val backgroundColors = listOf(R.color.dog_view_heat, R.color.dog_view_balls, R.color.dog_view_standard)
+
+
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val dogName: EditText = itemView.findViewById(R.id.dogNameDisplay)
         val dogAge: EditText = itemView.findViewById(R.id.ageDisplay)
@@ -35,15 +40,27 @@ class dogViewAdapter(
         private val editButton: ImageButton = itemView.findViewById(R.id.editDogButton)
         private val moveButton: ImageButton = itemView.findViewById(R.id.moveDogButton)
         val background: ImageView = itemView.findViewById(R.id.dogUnitBackground)
-        val heatButton: Button = itemView.findViewById(R.id.dogHeatButton)
+        private val heatButton: Button = itemView.findViewById(R.id.dogHeatButton)
         private var isEditing = false
+
 
         init {
             setEditTextsEditable(false)
         }
 
 
-        private fun Boolean.toInt() = if (this) 1 else 0
+
+
+
+        private fun setHeat(currentItem: DogItemView){
+            if (currentItem.heat){
+                background.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, backgroundColors[currentItem.gender.toInt()]))
+            } else {
+                background.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, backgroundColors[2]))
+            }
+        }
+
+
         private fun setEditTextsEditable(editable: Boolean){
             val colors = listOf(ContextCompat.getColor(this.itemView.context, R.color.white), ContextCompat.getColor(this.itemView.context, R.color.orange))
 
@@ -60,6 +77,13 @@ class dogViewAdapter(
             bodyScore.isFocusable = editable
             bodyScore.isFocusableInTouchMode = editable
             bodyScore.setTextColor(colors[editable.toInt()])
+            heatButton.visibility = View.VISIBLE
+
+            if (genderFemale.visibility == View.VISIBLE){
+                heatButton.text = "Heat"
+            } else {
+                heatButton.text = "Balls"
+            }
 
             //editButton.backgroundTintList = ContextCompat.getColorStateList(this.itemView.context, R.color.orange)
             if (!editable){
@@ -68,6 +92,7 @@ class dogViewAdapter(
                 castrationText.clearFocus()
                 bodyScore.clearFocus()
                 editButton.backgroundTintList = ColorStateList.valueOf(Color.TRANSPARENT)
+                heatButton.visibility = View.INVISIBLE
 
             }
         }
@@ -106,7 +131,7 @@ class dogViewAdapter(
                     currentItem.gender = true
                     genderFemale.visibility = View.INVISIBLE
                     genderMale.visibility = View.VISIBLE
-                    heatButton.visibility = View.VISIBLE
+                    setEditTextsEditable(true)
                     view.reload()
 
                 }
@@ -118,8 +143,7 @@ class dogViewAdapter(
                     currentItem.gender = false
                     genderFemale.visibility = View.VISIBLE
                     genderMale.visibility = View.INVISIBLE
-                    heatButton.visibility = View.INVISIBLE
-                    currentItem.heat = false
+                    setEditTextsEditable(true)
                     view.reload()
 
                 }
@@ -127,6 +151,7 @@ class dogViewAdapter(
 
             heatButton.setOnClickListener{
                 currentItem.heat = !currentItem.heat
+                setHeat(currentItem)
                 view.reload()
             }
         }
@@ -149,15 +174,16 @@ class dogViewAdapter(
 
         }
 
-        var backgroundColor = ContextCompat.getColor(context, R.color.dog_view_standard)
         if (currentItem.heat) {
-            backgroundColor = ContextCompat.getColor(context, R.color.dog_view_heat)
+            holder.background.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context,backgroundColors[currentItem.gender.toInt()]))
+        } else{
+            holder.background.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, backgroundColors[2]))
         }
-        holder.background.imageTintList = ColorStateList.valueOf(backgroundColor)
 
         holder.bind(currentItem)
 
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.dog_unit, parent, false)

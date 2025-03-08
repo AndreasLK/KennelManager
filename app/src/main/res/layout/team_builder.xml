@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_mode_background">
+    android:background="@color/dark_mode_background"
+    android:id="@+id/teamBuilderConstraintLayout">
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -65,11 +66,11 @@
         app:layout_constraintGuide_percent="0.15" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineTeamBuilderH70"
+        android:id="@+id/guidelineTeamBuilderH75"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.70" />
+        app:layout_constraintGuide_percent="0.75" />
 
     <ImageView
         android:id="@+id/teamBuilderSearchIcon"
@@ -122,21 +123,30 @@
 
         app:layout_constraintStart_toEndOf="@id/guidelineTeamBuilderV50"
         app:layout_constraintEnd_toStartOf="@id/guidelineTeamBuilderV60"
-        app:layout_constraintTop_toBottomOf="@id/guidelineTeamBuilderH70"
+        app:layout_constraintTop_toBottomOf="@id/guidelineTeamBuilderH75"
         app:layout_constraintBottom_toBottomOf="parent"
         >
         <include layout="@layout/teambuilder_sled"/>
     </FrameLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <FrameLayout
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/guidelineTeamBuilderV50"
+        app:layout_constraintEnd_toStartOf="@id/guidelineTeamBuilderV60"
+        app:layout_constraintBottom_toTopOf="@id/guidelineTeamBuilderH75"
+        >
 
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guidelineTeamBuilderH70"
-        app:layout_constraintStart_toEndOf="@id/guidelineTeamBuilderV40"
-        app:layout_constraintEnd_toStartOf="@id/guidelineTeamBuilderV70"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/teamBuilderSledRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/guidelineTeamBuilderH75"
+        app:layout_constraintStart_toEndOf="@id/guidelineTeamBuilderV50"
+        app:layout_constraintEnd_toStartOf="@id/guidelineTeamBuilderV60"
         />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/teamBuilderCurrentTour"
