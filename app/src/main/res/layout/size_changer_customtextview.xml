@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewRowName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Name of Row"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewWidth"
+        app:layout_constraintStart_toStartOf="@+id/textViewWidth"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWidth" />
+
+    <TextView
+        android:id="@+id/textViewHeight"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:text="Height"
+        app:layout_constraintEnd_toStartOf="@id/seekBarHeight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/heightAdjustTitle" />
+
+    <SeekBar
+        android:id="@+id/seekBarHeight"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:max="300"
+        android:min="100"
+        android:progress="25"
+        app:layout_constraintBottom_toBottomOf="@id/textViewHeight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewHeight"
+        app:layout_constraintTop_toTopOf="@id/textViewHeight" />
+
+    <TextView
+        android:id="@+id/textViewWidth"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:text="Width"
+        app:layout_constraintEnd_toStartOf="@id/seekBarWidth"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewHeight" />
+
+    <SeekBar
+        android:id="@+id/seekBarWidth"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:max="300"
+        android:min="100"
+        android:progress="25"
+        app:layout_constraintBottom_toBottomOf="@id/textViewWidth"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewWidth"
+        app:layout_constraintTop_toTopOf="@id/textViewWidth" />
+
+    <TextView
+        android:id="@+id/heightAdjustTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Size Of Cage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rowNameEditText">
+
+        <com.diarreatracker.ui.component.CustomTextView
+            android:id="@+id/dialog_block_view"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@color/teal_700"
+            android:padding="20dp"
+            android:text="Preview"
+            android:textColor="#FF9800"
+            app:rowName="Preview" />
+
+    </FrameLayout>
+
+
+    <Button
+        android:id="@+id/resetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/exitButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="close button"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:layout_constraintEnd_toEndOf="@+id/seekBarHeight"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/applyAndExitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apply And Exit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/seekBarHeight" />
+
+    <EditText
+        android:id="@+id/rowNameEditText"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        android:autofillHints="Row name"
+        android:ems="16"
+        android:inputType="text"
+
+        android:text="Row name"
+        app:layout_constraintEnd_toEndOf="@+id/seekBarHeight"
+        app:layout_constraintStart_toStartOf="@+id/seekBarHeight"
+        app:layout_constraintTop_toTopOf="@+id/textViewRowName" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="400dp"
+    android:layout_height="120dp"
+    android:background="@android:color/transparent"
+
+    >
+
+
+    <ImageView
+        android:id="@+id/dogUnitBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@android:drawable/editbox_background"
+        android:tint="@color/dog_view_standard"
+        tools:ignore="UseAppTint" />
+
+
+    <ImageView
+        android:id="@+id/genderSymbolMale"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/male_symbol_2239"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/dogUnitBackground"
+        app:layout_constraintTop_toTopOf="@+id/dogUnitBackground"
+        app:layout_constraintEnd_toStartOf="@id/menuButtonsForDog" />
+
+    <ImageView
+        android:id="@+id/genderSymbolFemale"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/female_symbol_2240"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/dogUnitBackground"
+        app:layout_constraintTop_toTopOf="@+id/dogUnitBackground"
+        app:layout_constraintEnd_toStartOf="@id/menuButtonsForDog" />
+
+    <ImageView
+        android:id="@+id/dogPopUpPotrait"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_margin="5dp"
+        android:src="@drawable/bhh_new"
+        app:layout_constraintBottom_toBottomOf="@id/dogUnitBackground"
+        app:layout_constraintStart_toStartOf="@id/dogUnitBackground"
+        app:layout_constraintTop_toTopOf="@id/dogUnitBackground" />
+
+    <EditText
+        android:id="@+id/dogNameDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@android:color/transparent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:inputType="text|textNoSuggestions"
+        android:text="Dog name Here"
+        android:textAlignment="viewStart"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/dogPopUpPotrait"
+        app:layout_constraintTop_toTopOf="@+id/dogPopUpPotrait"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/ageDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="X Years Old"
+        android:inputType="text"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/dogNameDisplay"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        app:layout_constraintTop_toBottomOf="@+id/dogNameDisplay"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/sterilizationTextDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:background="@android:color/transparent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:text="CASTRATED"
+        android:textSize="14sp"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@+id/ageDisplay"
+        app:layout_constraintTop_toBottomOf="@+id/dogNameDisplay"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/bodyScoreBasicText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Body Score: "
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/dogNameDisplay"
+        app:layout_constraintBottom_toBottomOf="@+id/dogUnitBackground"
+        app:layout_constraintTop_toBottomOf="@+id/ageDisplay"/>
+
+
+    <EditText
+        android:id="@+id/bodyScoreDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:text="4-"
+        android:textSize="14sp"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/bodyScoreBasicText"
+        app:layout_constraintStart_toEndOf="@+id/bodyScoreBasicText"
+        app:layout_constraintTop_toTopOf="@+id/bodyScoreBasicText"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <LinearLayout
+        android:id="@+id/menuButtonsForDog"
+        android:layout_width="45dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toBottomOf="@id/dogUnitBackground"
+        app:layout_constraintTop_toTopOf="@id/dogUnitBackground"
+        app:layout_constraintEnd_toEndOf="@id/dogUnitBackground">
+
+
+        <ImageButton
+            android:id="@+id/moveDogButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="top|center"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="TODO"
+            android:scaleType="centerInside"
+            android:src="@android:drawable/ic_menu_set_as"
+            />
+
+        <ImageButton
+            android:id="@+id/editDogButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom|center"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="TODO"
+            android:scaleType="centerInside"
+            android:src="@android:drawable/ic_menu_edit"
+            />
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/dogHeatButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="HEAT"
+        app:layout_constraintBottom_toBottomOf="@+id/dogPopUpPotrait"
+        app:layout_constraintTop_toBottomOf="@+id/ageDisplay"
+        app:layout_constraintEnd_toEndOf="@+id/dogPopUpPotrait"
+        app:layout_constraintStart_toStartOf="@+id/dogPopUpPotrait"
+        android:visibility="invisible"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
