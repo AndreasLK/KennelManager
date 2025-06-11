@@ -65,8 +65,9 @@ class CustomTextView : androidx.appcompat.widget.AppCompatTextView {
             dognames += dog.dogname + "\n"
 
         }
-        val fulltext = "$dognames\n$rowName"
+        val fulltext = "$rowName\n$dognames"
         text = fulltext
+
     }
 
 

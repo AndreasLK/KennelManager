@@ -93,35 +93,3 @@ class BlockDialog(
         showStatus()
     }
 }
-
-//        dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_block_options, null)
-//        val builder = AlertDialog.Builder(context)
-//        builder.setView(dialogView)
-//
-//        val dialogTitle = dialogView.findViewById<TextView>(R.id.dialog_title)
-//        val importantCheckBox = dialogView.findViewById<CheckBox>(R.id.dialog_checkbox)
-//        val applyButton = dialogView.findViewById<Button>(R.id.dialog_apply_button)
-//        val adjustButton = dialogView.findViewById<Button>(R.id.dialog_change_size_button)
-//        val editText = dialogView.findViewById<EditText>(R.id.dialog_edit_text)
-//        dialogBlockView = dialogView.findViewById(R.id.dialog_block_view)
-//
-//        dialogTitle.text = "Options for Block $blockIndex"
-//        editText.setText(actualView.rowName)
-//
-//        importantCheckBox.setOnCheckedChangeListener { _, isChecked ->
-//            val message = if (isChecked) {
-//                "Marked block $blockIndex as important"
-//            } else {
-//                "Unmarked block $blockIndex as important"
-//            }
-//            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-//        }
-//
-//        applyButton.setOnClickListener {
-//            actualView.rowName = editText.text.toString()
-//            actualView.text = "View ${actualView.id}\n${actualView.rowName}"
-//        }
-//
-//        adjustButton.setOnClickListener {
-//            adjuster.showDialog()
-//        }

@@ -1,9 +1,9 @@
-package com.diarreatracker// com.example.diarreatracker.DragTouchListener.kt
+package com.diarreatracker
+
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.FrameLayout
 import com.diarreatracker.ui.BlockDialog
 import com.diarreatracker.ui.DogSharedViewModel
 import com.diarreatracker.ui.component.CustomTextView
@@ -11,46 +11,46 @@ import kotlin.math.absoluteValue
 import kotlin.math.sqrt
 
 class DragTouchListener(
-    private val zoomableLayout: ConstraintLayout,
+    private val zoomableContent: FrameLayout, // Only the inner zoomable FrameLayout
     private val snapThreshold: Int = 50,
     private val scaleHolder: MainActivity.ScaleHolder,
     private val viewModel: DogSharedViewModel,
     private val editPermission: Boolean
-    ) : View.OnTouchListener {
+) : View.OnTouchListener {
 
-    private var dX = 0f
-    private var dY = 0f
-    private var startX = 0f
-    private var startY = 0f
-    private val snappingDistance = snapThreshold*scaleHolder.scaleFactor
+    private var downRawX = 0f
+    private var downRawY = 0f
+    private var viewDownX = 0f
+    private var viewDownY = 0f
     private val clickThreshold = 7
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(view: View, event: MotionEvent): Boolean {
+
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                dX = view.x - event.rawX
-                dY = view.y - event.rawY
-                startX = event.rawX
-                startY = event.rawY
+                downRawX = event.rawX
+                downRawY = event.rawY
+                viewDownX = view.x
+                viewDownY = view.y
             }
             MotionEvent.ACTION_MOVE -> {
-                val newX = (event.rawX) + dX
-                val newY = (event.rawY) + dY
+                if (editPermission) {
+                    val deltaX = event.rawX - downRawX
+                    val deltaY = event.rawY - downRawY
 
-                view.animate()
-                    .x(newX)
-                    .y(newY)
-                    .setDuration(0)
-                    .start()
+                    view.x = viewDownX + deltaX / scaleHolder.scaleFactor
+                    view.y = viewDownY + deltaY / scaleHolder.scaleFactor
+                }
             }
             MotionEvent.ACTION_UP -> {
-                val distanceX = (event.rawX - startX).toInt()
-                val distanceY = (event.rawY - startY).toInt()
+                val distanceX = (event.rawX - downRawX).toInt()
+                val distanceY = (event.rawY - downRawY).toInt()
 
                 if (distanceX.absoluteValue < clickThreshold && distanceY.absoluteValue < clickThreshold) {
                     val dialog = BlockDialog(view.context as MainActivity, view.id, view as CustomTextView, viewModel)
                     dialog.showDialog()
-                } else {
+                } else if(editPermission) {
                     snapToClosestView(view)
                 }
             }
@@ -58,14 +58,12 @@ class DragTouchListener(
         return true
     }
 
-    @SuppressLint("SetTextI18n")
     private fun snapToClosestView(view: View) {
         var closestView: View? = null
         var minDistance = Float.MAX_VALUE
 
-        // Find the closest view within the snapping threshold
-        for (i in 0 until zoomableLayout.childCount) {
-            val otherView = zoomableLayout.getChildAt(i)
+        for (i in 0 until zoomableContent.childCount) {
+            val otherView = zoomableContent.getChildAt(i)
             if (otherView != view) {
                 val distance = calculateDistance(view, otherView)
                 if (distance < snapThreshold * scaleHolder.scaleFactor && distance < minDistance) {
@@ -75,75 +73,64 @@ class DragTouchListener(
             }
         }
 
-        // Perform snapping if a close enough view is found
         closestView?.let { target ->
             var snapX = view.x
             var snapY = view.y
 
-            //Check if Horizontal or vertical snapping is intended:
-            //VERTICES = 0 Top, 1 Left, 2, Bottom, 3 Right
             val targetEdges = getSidesOfView(target)
             val viewEdges = getSidesOfView(view)
 
             var shortestDistance = Float.MAX_VALUE
             var shortestDistanceEdge = 0
-            for (i in viewEdges.indices){
+            for (i in viewEdges.indices) {
                 val distance = calculateDistanceCoordinates(viewEdges[i], targetEdges[(i + 2) % 4])
-
-                if (distance < shortestDistance){
-                    shortestDistanceEdge = i
+                if (distance < shortestDistance) {
                     shortestDistance = distance
+                    shortestDistanceEdge = i
                 }
             }
 
-
+            // Snap based on edge
             when (shortestDistanceEdge) {
                 0 -> {
-
                     snapX = target.x
-                    snapY = target.y + target.height * target.scaleY
-                    Log.d("SNAPPING", "TOP TO BOTTOM")
+                    snapY = target.y + target.height
                 }
                 1 -> {
-                    snapX = target.x + target.width * target.scaleX
+                    snapX = target.x + target.width
                     snapY = target.y
-                    Log.d("SNAPPING", "LEFT TO RIGHT")
                 }
-                2 ->{
+                2 -> {
                     snapX = target.x
-                    snapY = target.y - view.height * view.scaleY
-                    Log.d("SNAPPING", "BOTTOM TO TOP")
+                    snapY = target.y - view.height
                 }
-                3 ->{
-
-                    snapX = target.x - view.width * view.scaleX
+                3 -> {
+                    snapX = target.x - view.width
                     snapY = target.y
-                    Log.d("SNAPPING", "RIGHT TO LEFT")
                 }
             }
-            // Once snapping is done, update rowName
+
             if (view is CustomTextView && target is CustomTextView) {
-                // Set the rowName of the dragged view to match the target view's rowName
                 view.rowName = target.rowName
-                // Update the text to reflect the new rowName
                 view.reload()
             }
 
-
-
-            // Apply the new snap position with animation
             view.animate()
                 .x(snapX)
                 .y(snapY)
-                .setDuration(100) // animate snapping for smoothness
+                .setDuration(100)
                 .start()
         }
     }
-    private fun getSidesOfView(view:View): Array<FloatArray>{
-        val top = floatArrayOf(view.x + (view.width / 2) * view.scaleX, view.y)
-        val left = floatArrayOf(view.x, view.y + (view.height / 2) * view.scaleY)
-        val bottom = floatArrayOf(view.x + (view.width / 2) * view.scaleX, view.y + view.height * view.scaleY)
-        val right = floatArrayOf(view.x + view.width * view.scaleX, view.y + (view.height / 2) * view.scaleY)
+
+    private fun getSidesOfView(view: View): Array<FloatArray> {
+        val halfWidth = (view.width) / 2f
+        val halfHeight = (view.height) / 2f
+
+        val top = floatArrayOf(view.x + halfWidth, view.y)
+        val left = floatArrayOf(view.x, view.y + halfHeight)
+        val bottom = floatArrayOf(view.x + halfWidth, view.y + view.height)
+        val right = floatArrayOf(view.x + view.width, view.y + halfHeight)
 
         return arrayOf(top, left, bottom, right)
     }
@@ -159,5 +146,4 @@ class DragTouchListener(
         val dy = coordinate1[1] - coordinate2[1]
         return sqrt(dx * dx + dy * dy)
     }
-
 }

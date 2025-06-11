@@ -1,8 +1,8 @@
 import android.view.GestureDetector
 import android.view.MotionEvent
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.FrameLayout
 
-class ScrollGestureListener(private val zoomableLayout: ConstraintLayout) : GestureDetector.SimpleOnGestureListener() {
+class ScrollGestureListener(private val zoomableLayout: FrameLayout) : GestureDetector.SimpleOnGestureListener() {
     override fun onScroll(
         e1: MotionEvent?,
         e2: MotionEvent,

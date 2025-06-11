@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.diarreatracker.ui.component.CustomTextView
 import com.diarreatracker.ui.component.DogItemView
@@ -29,6 +30,13 @@ class dogViewAdapter(
     private fun Boolean.toInt() = if (this) 1 else 0
     private val backgroundColors = listOf(R.color.dog_view_heat, R.color.dog_view_balls, R.color.dog_view_standard)
 
+    fun heatClr(currentItem: DogItemView): ColorStateList {
+        return if (currentItem.heat){
+            ColorStateList.valueOf(ContextCompat.getColor(context, backgroundColors[currentItem.gender.toInt()]))
+        } else {
+            ColorStateList.valueOf(ContextCompat.getColor(context, backgroundColors[2]))
+        }
+    }
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val dogName: EditText = itemView.findViewById(R.id.dogNameDisplay)
@@ -52,13 +60,7 @@ class dogViewAdapter(
 
 
 
-        private fun setHeat(currentItem: DogItemView){
-            if (currentItem.heat){
-                background.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, backgroundColors[currentItem.gender.toInt()]))
-            } else {
-                background.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, backgroundColors[2]))
-            }
-        }
+
 
 
         private fun setEditTextsEditable(editable: Boolean){
@@ -79,7 +81,7 @@ class dogViewAdapter(
             bodyScore.setTextColor(colors[editable.toInt()])
             heatButton.visibility = View.VISIBLE
 
-            if (genderFemale.visibility == View.VISIBLE){
+            if (genderFemale.isVisible){
                 heatButton.text = "Heat"
             } else {
                 heatButton.text = "Balls"
@@ -151,9 +153,10 @@ class dogViewAdapter(
 
             heatButton.setOnClickListener{
                 currentItem.heat = !currentItem.heat
-                setHeat(currentItem)
+                background.imageTintList = heatClr(currentItem)
                 view.reload()
             }
+
         }
 
     }
@@ -174,12 +177,7 @@ class dogViewAdapter(
 
         }
 
-        if (currentItem.heat) {
-            holder.background.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context,backgroundColors[currentItem.gender.toInt()]))
-        } else{
-            holder.background.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, backgroundColors[2]))
-        }
-
+        holder.background.imageTintList = heatClr(currentItem)
         holder.bind(currentItem)
 
     }

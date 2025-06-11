@@ -3,6 +3,13 @@ package com.diarreatracker.ui.component
 data class Dog(
     val dogID: String,
     val dogName: String,
+    val gender: Boolean,
+    val sterilized: Boolean,
+    val cageID: Int,
+
+    val parents: List<Int>,
+    val children: List<Int>,
+
     var runIDs: List<Int>,
     var poopscoreIDs: List<Int>,
     var vaccineIDs: List<Int>,
@@ -10,6 +17,3 @@ data class Dog(
     var vetVisitIDs: List<Int>,
     var heatIDs: List<Int>
 )
-
-//TODO: MAKE Data class for all of following: DOG(last), Poopscores, Running, Vaccines, Bodyscore, Vet Visists, Heat
-//TODO: ALL SHOULD HAVE A DOGID FIELD and a person who pushed the stuff (person who pushed a run of 5km fx)

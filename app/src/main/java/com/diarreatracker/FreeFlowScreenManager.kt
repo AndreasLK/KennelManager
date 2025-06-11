@@ -7,10 +7,10 @@ import android.view.GestureDetector
 import android.view.ScaleGestureDetector
 import android.view.View
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import com.diarreatracker.DogViewDragTouchListener
 import com.diarreatracker.DragTouchListener
@@ -20,7 +20,7 @@ import com.example.diarreatracker.R
 
 class FreeFlowScreenManager(
     private val context: Context,
-    private val zoomableLayout: ConstraintLayout,
+    private val zoomableLayout: FrameLayout,
     private val fileHandler: FileHandler, // Add FileHandler dependency
     private val scaleHolder: MainActivity.ScaleHolder,
     private val editPermission: Boolean
@@ -32,9 +32,9 @@ class FreeFlowScreenManager(
         val viewModel = ViewModelProvider(context as MainActivity)[DogSharedViewModel::class.java]
 
         val dragTouchListener = DragTouchListener(zoomableLayout, 180, scaleHolder, viewModel, editPermission)
-        val dogViewDragTouchListener = DogViewDragTouchListener(zoomableLayout, 500, scaleHolder, editPermission)
+        val dogViewDragTouchListener = DogViewDragTouchListener(dragTouchListener,zoomableLayout, 500, scaleHolder, editPermission, context)
         // Initialize ViewManager
-        viewManager = ViewManager(zoomableLayout, fileHandler, dragTouchListener, dogViewDragTouchListener,scaleHolder, viewModel)
+        viewManager = ViewManager(zoomableLayout, fileHandler, dragTouchListener, dogViewDragTouchListener,scaleHolder, viewModel, context)
 
         val scaleGestureDetector = ScaleGestureDetector(context, ScaleListener(zoomableLayout, scaleHolder))
         val gestureDetector = GestureDetector(context, ScrollGestureListener(zoomableLayout))

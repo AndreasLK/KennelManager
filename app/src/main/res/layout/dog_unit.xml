@@ -173,9 +173,19 @@
         app:layout_constraintBottom_toBottomOf="@+id/dogPopUpPotrait"
         app:layout_constraintTop_toBottomOf="@+id/ageDisplay"
         app:layout_constraintEnd_toEndOf="@+id/dogPopUpPotrait"
-        app:layout_constraintStart_toStartOf="@+id/dogPopUpPotrait"
+        app:layout_constraintStart_toEndOf="@+id/dogDeleteButton"
         android:visibility="invisible"
         />
+
+    <ImageButton
+        android:id="@+id/dogDeleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:padding="1dp"
+        android:src="@android:drawable/ic_menu_delete"
+        app:layout_constraintBottom_toBottomOf="@+id/dogUnitBackground"
+        app:layout_constraintStart_toStartOf="@+id/dogUnitBackground"
+        app:layout_constraintTop_toTopOf="@+id/dogUnitBackground" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

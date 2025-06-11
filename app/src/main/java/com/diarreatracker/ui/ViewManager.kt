@@ -1,14 +1,18 @@
 package com.diarreatracker.ui
 
+import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Color.LTGRAY
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import com.diarreatracker.DogViewDragTouchListener
 import com.diarreatracker.DragTouchListener
 import com.diarreatracker.MainActivity
@@ -18,21 +22,25 @@ import com.diarreatracker.ui.component.ViewState
 import com.example.diarreatracker.R
 
 class ViewManager(
-    private val layout: ConstraintLayout,
+    private val layout: FrameLayout,
     private val fileHandler: FileHandler,
     private val dragTouchListener: DragTouchListener,
     private val dogViewDragTouchListener: DogViewDragTouchListener,
     private val scaleHolder: MainActivity.ScaleHolder,
-    private val viewModel: DogSharedViewModel
+    viewModel: DogSharedViewModel,
+    private val context: Context
 ) {
 
     private var viewCount = 0
+    private val backgroundColors = listOf(R.color.dog_view_heat, R.color.dog_view_balls, R.color.dog_view_standard)
 
     init {
         viewModel.addDogEvent.observe(this.layout.context as MainActivity) { dog ->
             addDogView(dog)
         }
     }
+    private fun Boolean.toInt() = if (this) 1 else 0
+
     fun addView() {
         val initialSize = (100 * layout.resources.displayMetrics.density).toInt()
         val newView = CustomTextView(layout.context).apply {
@@ -42,8 +50,6 @@ class ViewManager(
             setBackgroundColor(LTGRAY)
             setPadding(20, 20, 20, 20)
             layoutParams = ConstraintLayout.LayoutParams(initialSize, initialSize)
-            scaleX = scaleHolder.scaleFactor
-            scaleY = scaleHolder.scaleFactor
             setOnTouchListener(dragTouchListener)
         }
 
@@ -70,8 +76,8 @@ class ViewManager(
 
         dogView.layoutParams = layoutParams
 
-        dogView.scaleX = scaleHolder.scaleFactor
-        dogView.scaleY = scaleHolder.scaleFactor
+        dogView.scaleX = (scaleHolder.scaleFactor - 0.3).toFloat()
+        dogView.scaleY = (scaleHolder.scaleFactor - 0.3).toFloat()
 
 
         dogView.findViewById<EditText>(R.id.dogNameDisplay).setText(dogItemView.dogname)
@@ -94,6 +100,13 @@ class ViewManager(
         } else {
             dogView.findViewById<ImageView>(R.id.genderSymbolFemale).visibility = View.VISIBLE
             dogView.findViewById<ImageView>(R.id.genderSymbolMale).visibility = View.INVISIBLE
+        }
+
+        val background = dogView.findViewById<ImageView>(R.id.dogUnitBackground)
+        if (dogItemView.heat){
+            background.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context,backgroundColors[dogItemView.gender.toInt()]))
+        } else {
+            background.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, backgroundColors[2]))
         }
 
         dogView.setOnTouchListener(dogViewDragTouchListener) //Should get separate dragTouchListener
@@ -130,11 +143,9 @@ class ViewManager(
             val newView = CustomTextView(layout.context).apply {
                 id = viewState.id
                 rowName = viewState.rowName
-                text = "View $id\n$rowName"
+                text = ""
                 x = viewState.x
                 y = viewState.y
-                scaleX = viewState.scaleX
-                scaleY = viewState.scaleY
                 setBackgroundColor(LTGRAY)
                 setPadding(20, 20, 20, 20)
                 layoutParams = ConstraintLayout.LayoutParams(viewState.width, viewState.height)
@@ -142,6 +153,7 @@ class ViewManager(
 
                 setOnTouchListener(dragTouchListener)
             }
+            newView.reload()
             Log.d("VIEWSTATE LOAD", "${newView.width}, ${newView.height} = ${viewState.width}, ${viewState.height}")
             layout.addView(newView)
         }

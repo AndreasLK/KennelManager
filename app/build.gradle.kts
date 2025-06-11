@@ -1,16 +1,19 @@
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android") version "2.0.0"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.1.0"
+    id("org.jetbrains.kotlin.plugin.compose")
+
 }
 
 android {
     namespace = "com.example.diarreatracker"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.diarreatracker"
-        minSdk = 31
-        targetSdk = 34
+        minSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -39,9 +42,7 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -50,7 +51,7 @@ android {
 }
 
 dependencies {
-
+    // ─── AndroidX UI / Core / Testing (unchanged) ────────────────────────────────
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -64,7 +65,7 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.bcprov.jdk15on)
     implementation(libs.bcpkix.jdk15on)
-
+    implementation(libs.androidx.media3.common.ktx)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -73,4 +74,20 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // ─── Retrofit, OkHttp, kotlinx-serialization & Coroutines (NEW) ────────────
+
+    // 1) Retrofit 3.0.0: type-safe HTTP client with first-party Kotlinx serialization converter :contentReference[oaicite:0]{index=0}
+    implementation(libs.retrofit)
+    implementation(libs.converter.kotlinx.serialization)
+
+    // 2) OkHttp 4.10.0: underlying HTTP client for Retrofit :contentReference[oaicite:1]{index=1}
+    implementation(libs.okhttp)
+
+    // 3) kotlinx-serialization-json 1.8.1: JSON runtime for Kotlin serialization :contentReference[oaicite:2]{index=2}
+    implementation(libs.kotlinx.serialization.json.jvm)
+
+    // 4) kotlinx-coroutines-android & core 1.10.2: coroutine support on Android :contentReference[oaicite:3]{index=3}
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
 }
