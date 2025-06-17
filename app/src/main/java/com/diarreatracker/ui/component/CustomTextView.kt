@@ -1,9 +1,24 @@
 package com.diarreatracker.ui.component
 import android.content.Context
+import android.graphics.Paint
+import android.graphics.RectF
 import android.util.AttributeSet
+import androidx.core.content.withStyledAttributes
 import com.example.diarreatracker.R
 
 class CustomTextView : androidx.appcompat.widget.AppCompatTextView {
+
+    private val borderPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.STROKE
+        strokeWidth = 10f // Adjust the stroke width as needed
+    }
+    var dogColors: List<Int> = emptyList()
+        set(value) {
+            field = value
+            invalidate() // Request a redraw
+        }
+
+    private val arcRct = RectF()
 
     // Property for rowName
     var rowName: String = "Nan"
@@ -51,12 +66,13 @@ class CustomTextView : androidx.appcompat.widget.AppCompatTextView {
     // Method to initialize custom attributes
     private fun initCustomAttributes(context: Context, attrs: AttributeSet) {
         // Obtain the custom attributes
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomTextView)
+        context.withStyledAttributes(attrs, R.styleable.CustomTextView) {
 
-        // Get the value for rowName
-        rowName = typedArray.getString(R.styleable.CustomTextView_rowName) ?: "Not Assigned" // Default value
+            // Get the value for rowName
+            rowName =
+                getString(R.styleable.CustomTextView_rowName) ?: "Not Assigned" // Default value
 
-        typedArray.recycle()
+        }
     }
 
     fun reload(){
@@ -69,6 +85,27 @@ class CustomTextView : androidx.appcompat.widget.AppCompatTextView {
         text = fulltext
 
     }
+
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+
+        if (dogColors.isEmpty()) return
+
+        val halfStroke = borderPaint.strokeWidth / 2f
+        arcRct.set(
+            halfStroke,
+            halfStroke,
+            width - halfStroke,
+            height - halfStroke)
+    }
+
+
+
+
+
+
+
 
 
 }

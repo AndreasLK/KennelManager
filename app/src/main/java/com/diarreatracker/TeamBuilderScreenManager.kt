@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.diarreatracker.ui.GanglineAdapter
-import com.diarreatracker.ui.TeamBuilderDogAdapter
 import com.example.diarreatracker.R
 
 class TeamBuilderScreenManager(
@@ -28,7 +27,6 @@ class TeamBuilderScreenManager(
         gangline.layoutManager = ganglineManager
         gangline.adapter = GanglineAdapter(5)
         dogRecycler.layoutManager = dogRecyclerManager
-        dogRecycler.adapter = TeamBuilderDogAdapter(100)
 
 
 

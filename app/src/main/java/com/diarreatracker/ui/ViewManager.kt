@@ -136,7 +136,7 @@ class ViewManager(
         Toast.makeText(layout.context, "SAVED", Toast.LENGTH_SHORT).show()
     }
 
-    fun addViewFromStorage() {
+    fun addViewFromStorage(days: Int) {
         layout.removeAllViews()
         val viewStates = fileHandler.loadViewStates()
         for (viewState in viewStates) {
@@ -150,6 +150,18 @@ class ViewManager(
                 setPadding(20, 20, 20, 20)
                 layoutParams = ConstraintLayout.LayoutParams(viewState.width, viewState.height)
                 dogs = viewState.dogs
+
+                val sortedDogs = dogs.sortedBy { it.runCount.toFloat() / days }
+                dogColors = sortedDogs.map { dog ->
+                    when (dog.runCount.toFloat() / days) {
+                        in 0.9f..1f -> ContextCompat.getColor(context, R.color.dog6)
+                        in 0.7f..0.9f -> ContextCompat.getColor(context, R.color.dog5)
+                        in 0.5f..0.7f -> ContextCompat.getColor(context, R.color.dog4)
+                        in 0.3f..0.5f -> ContextCompat.getColor(context, R.color.dog3)
+                        in 0.1f..0.3f -> ContextCompat.getColor(context, R.color.dog2)
+                        else -> ContextCompat.getColor(context, R.color.dog1)
+                    }
+                }
 
                 setOnTouchListener(dragTouchListener)
             }

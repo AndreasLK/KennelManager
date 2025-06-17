@@ -64,6 +64,7 @@ class BlockDialog(
 
 
         dialog.show()
+        dialog.window?.setLayout(1000,800)
     }
 
     private fun showDogs() {

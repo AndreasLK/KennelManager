@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="400dp"
-    android:layout_height="120dp"
+    android:layout_width="600dp"
+    android:layout_height="180dp"
     android:background="@android:color/transparent"
 
     >
@@ -46,12 +46,13 @@
 
     <ImageView
         android:id="@+id/dogPopUpPotrait"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+        android:layout_width="120dp"
+        android:layout_height="0dp"
         android:layout_margin="5dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/bhh_new"
         app:layout_constraintBottom_toBottomOf="@id/dogUnitBackground"
-        app:layout_constraintStart_toStartOf="@id/dogUnitBackground"
+        app:layout_constraintStart_toEndOf="@id/dogDeleteButton"
         app:layout_constraintTop_toTopOf="@id/dogUnitBackground" />
 
     <EditText
@@ -131,7 +132,7 @@
 
     <LinearLayout
         android:id="@+id/menuButtonsForDog"
-        android:layout_width="45dp"
+        android:layout_width="75dp"
         android:layout_height="0dp"
         android:orientation="vertical"
         android:layout_margin="5dp"
@@ -142,7 +143,7 @@
 
         <ImageButton
             android:id="@+id/moveDogButton"
-            android:layout_width="48dp"
+            android:layout_width="80dp"
             android:layout_height="48dp"
             android:layout_gravity="top|center"
             android:backgroundTint="@android:color/transparent"
@@ -153,13 +154,24 @@
 
         <ImageButton
             android:id="@+id/editDogButton"
-            android:layout_width="48dp"
+            android:layout_width="80dp"
             android:layout_height="48dp"
             android:layout_gravity="bottom|center"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="TODO"
             android:scaleType="centerInside"
             android:src="@android:drawable/ic_menu_edit"
+            />
+
+        <ImageButton
+            android:id="@+id/addRunDogButton"
+            android:layout_width="80dp"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom|center"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="TODO"
+            android:scaleType="centerInside"
+            android:src="@drawable/_507c8c3_661f_4d2b_934e_fee3a67a1d38"
             />
 
 

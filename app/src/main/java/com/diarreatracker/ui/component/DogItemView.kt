@@ -6,5 +6,6 @@ data class DogItemView(
     var dateOfBirth: String,
     var castrationText: String,
     var bodyScore: String,
-    var heat: Boolean
+    var heat: Boolean,
+    var runCount: Int = 2
 )

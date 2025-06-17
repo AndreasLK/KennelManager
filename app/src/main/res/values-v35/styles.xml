@@ -2,5 +2,8 @@
 <resources>
     <style name="Theme.DiarreaTracker" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:fitsSystemWindows">false</item>
     </style>
 </resources>

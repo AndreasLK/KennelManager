@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_mode_background"
-    android:id="@+id/teamBuilderConstraintLayout">
+    android:id="@+id/teamBuilderConstraintLayout"
+    android:fitsSystemWindows="true"
+    >
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -113,9 +115,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="View On Map"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineTeamBuilderH06"
         app:layout_constraintEnd_toStartOf="@+id/guidelineTeamBuilderV40"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.816"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
         android:layout_width="0dp"

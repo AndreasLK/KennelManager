@@ -1,8 +1,12 @@
 package com.diarreatracker.ui.component
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class DogRunSummary(
-    val dogID: Int,
-    val dogName: String,
-    val runCount: Int,
-    val totalDistance: Int
+    @SerialName("ID") val dogID: Int,
+    @SerialName("DogName") val dogName: String,
+    @SerialName("RunCount") val runCount: Int,
+    @SerialName("TotalDistance") val totalDistance: Float
 )

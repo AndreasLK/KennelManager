@@ -12,9 +12,14 @@ import androidx.activity.ComponentActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.diarreatracker.ui.FileHandler
 import com.diarreatracker.ui.FreeFlowScreenManager
+import com.diarreatracker.ui.TeamBuilderDogAdapter
 import com.example.diarreatracker.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.security.MessageDigest
 
@@ -31,7 +36,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         ApiClient.initialize(this)
         setFreeFlowScreen(true)
-        //setLoginScreen()
     }
 
     inner class ScaleHolder{
@@ -78,6 +82,8 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, true)
         setContentView(R.layout.free_flow_page)
         zoomableLayout = findViewById(R.id.zoomable_content)
+
+
         // Initialize FreeFlowScreenManager
         val freeFlowScreenManager = FreeFlowScreenManager(this, zoomableLayout, fileHandler, scaleHolder, permissionLevel)
         freeFlowScreenManager.initialize()
@@ -87,6 +93,30 @@ class MainActivity : ComponentActivity() {
         if (permissionLevel) {
             setContentView(R.layout.team_builder)
             val layout = findViewById<ConstraintLayout>(R.id.teamBuilderConstraintLayout)
+            val numColumns = 4
+            val days = 3
+            CoroutineScope(Dispatchers.Main).launch {
+                try {
+                    Log.d("Teambuilder", "Fetching dog summaries")
+                    val dogs = ApiClient.getAllRunSummaries(days = days)
+                        .sortedBy{it.runCount}
+                    Log.d("Teambuilder", "Fetched ${dogs.size} dogs")
+                    val recyclerView = findViewById<RecyclerView>(R.id.teamBuilderDogRecycler)
+                    recyclerView.layoutManager = GridLayoutManager(this@MainActivity, numColumns)
+                    recyclerView.post {
+                        val recyclerWidth = recyclerView.width
+                        recyclerView.setHasFixedSize(false)
+                        recyclerView.adapter = TeamBuilderDogAdapter(dogs, recyclerWidth, numColumns, this@MainActivity, days )
+                        Log.d("Teambuilder", "Adapter set!")
+
+                    }
+
+
+                } catch (e: Exception){
+                    Log.e("TeamBuilder", "Failed to fetch dogs", e)
+                    Toast.makeText(this@MainActivity, "Could not load dog list", Toast.LENGTH_SHORT).show()
+                }
+            }
 
             val teamBuilderScreenManager = TeamBuilderScreenManager(this, layout)
             teamBuilderScreenManager.initialize()

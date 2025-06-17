@@ -67,7 +67,7 @@ class FreeFlowScreenManager(
         }
 
         loadButton.setOnClickListener {
-            viewManager.addViewFromStorage()
+            viewManager.addViewFromStorage(3)
             Toast.makeText(context, "LOADED", Toast.LENGTH_SHORT).show()
         }
 

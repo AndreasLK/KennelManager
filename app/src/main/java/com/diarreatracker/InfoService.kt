@@ -2,6 +2,7 @@
 package com.diarreatracker
 
 import android.content.Context
+import com.diarreatracker.ui.component.DogRunSummary
 import com.example.diarreatracker.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -329,6 +330,9 @@ interface InfoService {
         @Query("days") days: Int = 7
     ): RunCountResponse
 
+    @GET("/dogs/runsummary")
+    suspend fun getAllRunSummaries(@Query("days") days: Int = 7): List<DogRunSummary>
+
     // CRUD for Dog
     @POST("/dogs/")
     suspend fun createDog(@Body payload: DogCreate): DogRead
@@ -516,8 +520,8 @@ interface InfoService {
  */
 object ApiClient {
     // ─── CONFIGURATION: Point these to your FastAPI servers ───────────────────
-    private const val AUTH_BASE_URL = "https://192.168.88.56:4000"
-    private const val INFO_BASE_URL = "https://0.0.0.0:8001"
+    private const val AUTH_BASE_URL = "https://192.168.10.154:4000"
+    private const val INFO_BASE_URL = "https://192.168.10.154:8002"
 
     @Volatile
     private var jwtToken: String? = null
@@ -590,7 +594,7 @@ object ApiClient {
             val retrofitInfo = Retrofit.Builder()
                 .baseUrl(INFO_BASE_URL)
                 .addConverterFactory(json.asConverterFactory(contentTypeJson))
-                .client(getCustomOkHttpClient(context, withAuthInterceptor = true)) // With authInterceptor
+                .client(getCustomOkHttpClient(context))
                 .build()
 
             infoService = retrofitInfo.create(InfoService::class.java)
@@ -641,6 +645,10 @@ object ApiClient {
 
     suspend fun getRunCount(dogId: Int, days: Int = 7): RunCountResponse = withContext(Dispatchers.IO) {
         infoService.getRunCount(dogId, days)
+    }
+
+    suspend fun getAllRunSummaries(days: Int = 7): List<DogRunSummary> = withContext(Dispatchers.IO) {
+        infoService.getAllRunSummaries(days)
     }
 
     suspend fun listDogs(): List<DogRead> = withContext(Dispatchers.IO) {
