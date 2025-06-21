@@ -67,6 +67,9 @@ dependencies {
     implementation(libs.bcpkix.jdk15on)
     implementation(libs.androidx.media3.common.ktx)
 
+    implementation(libs.android.pdf.viewer)
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

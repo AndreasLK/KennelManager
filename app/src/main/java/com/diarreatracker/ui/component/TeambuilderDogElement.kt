@@ -2,7 +2,7 @@ package com.diarreatracker.ui.component
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toDrawable
 import com.example.diarreatracker.R
 
 class TeambuilderDogElement @JvmOverloads constructor(
@@ -43,6 +43,11 @@ class TeambuilderDogElement @JvmOverloads constructor(
             else -> R.color.dog1
         }
 
-        setBackgroundColor(ContextCompat.getColor(context, bgColorRes))
+        setBackgroundResource(R.drawable.textview_background)
+
+        val layerDrawable = background as android.graphics.drawable.LayerDrawable
+        val resolvedColor = context.getColor(bgColorRes)
+        val colorDrawable = resolvedColor.toDrawable()
+        layerDrawable.setDrawableByLayerId(R.id.bg_color_layer, colorDrawable)
     }
 }

@@ -4,13 +4,14 @@ import android.annotation.SuppressLint
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
-import com.diarreatracker.ui.BlockDialog
+import com.diarreatracker.ui.BlockDialogFragment
 import com.diarreatracker.ui.DogSharedViewModel
 import com.diarreatracker.ui.component.CustomTextView
 import kotlin.math.absoluteValue
 import kotlin.math.sqrt
 
 class DragTouchListener(
+    private val activity: MainActivity,
     private val zoomableContent: FrameLayout, // Only the inner zoomable FrameLayout
     private val snapThreshold: Int = 50,
     private val scaleHolder: MainActivity.ScaleHolder,
@@ -48,8 +49,12 @@ class DragTouchListener(
                 val distanceY = (event.rawY - downRawY).toInt()
 
                 if (distanceX.absoluteValue < clickThreshold && distanceY.absoluteValue < clickThreshold) {
-                    val dialog = BlockDialog(view.context as MainActivity, view.id, view as CustomTextView, viewModel)
-                    dialog.showDialog()
+                    //val dialog = BlockDialog(view.context as MainActivity, view.id, view as CustomTextView, viewModel)
+                    //dialog.showDialog()
+
+                    BlockDialogFragment.newInstance(view.id, view as CustomTextView, viewModel)
+                        .show(activity.supportFragmentManager, "BlockDialog")
+
                 } else if(editPermission) {
                     snapToClosestView(view)
                 }

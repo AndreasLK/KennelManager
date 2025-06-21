@@ -15,6 +15,7 @@ import com.diarreatracker.ui.component.CustomTextView
 import com.diarreatracker.ui.component.DogItemView
 import com.diarreatracker.ui.component.StatusItem
 import com.example.diarreatracker.R
+import com.github.barteksc.pdfviewer.PDFView
 
 class BlockDialog(
     private val context: MainActivity,
@@ -41,9 +42,19 @@ class BlockDialog(
             dialog.dismiss()
         }
 
+        val pdfView = dialogView.findViewById<PDFView>(R.id.pdfReader)
+        pdfView.visibility = View.GONE
         val editGeometryButttons = dialogView.findViewById<TextView>(R.id.editCageGeometryButton)
         editGeometryButttons.setOnClickListener {
-            adjuster.showDialog()
+            pdfView.fromAsset("APOP+CANINE+BCS+CLINICS+2024.pdf")
+                .enableSwipe(false)
+                .swipeHorizontal(true)
+                .enableDoubletap(true)
+                .defaultPage(0)
+                .load()
+            pdfView.visibility = View.VISIBLE
+
+            //adjuster.showDialog()
         }
 
         val addDogButton = dialogView.findViewById<TextView>(R.id.addDogButton)

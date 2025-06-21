@@ -35,8 +35,8 @@
 
     <ImageView
         android:id="@+id/genderSymbolFemale"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_margin="10dp"
         android:src="@drawable/female_symbol_2240"
         android:visibility="visible"
@@ -140,39 +140,35 @@
         app:layout_constraintTop_toTopOf="@id/dogUnitBackground"
         app:layout_constraintEnd_toEndOf="@id/dogUnitBackground">
 
-
         <ImageButton
             android:id="@+id/moveDogButton"
             android:layout_width="80dp"
-            android:layout_height="48dp"
+            android:layout_height="52dp"
             android:layout_gravity="top|center"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="TODO"
             android:scaleType="centerInside"
-            android:src="@android:drawable/ic_menu_set_as"
-            />
+            android:src="@drawable/movedogcustomicon" />
 
         <ImageButton
             android:id="@+id/editDogButton"
             android:layout_width="80dp"
-            android:layout_height="48dp"
+            android:layout_height="52dp"
             android:layout_gravity="bottom|center"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="TODO"
             android:scaleType="centerInside"
-            android:src="@android:drawable/ic_menu_edit"
-            />
+            android:src="@drawable/editdogcustomicon" />
 
         <ImageButton
             android:id="@+id/addRunDogButton"
             android:layout_width="80dp"
-            android:layout_height="48dp"
+            android:layout_height="52dp"
             android:layout_gravity="bottom|center"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="TODO"
             android:scaleType="centerInside"
-            android:src="@drawable/_507c8c3_661f_4d2b_934e_fee3a67a1d38"
-            />
+            android:src="@drawable/addruncustomicon" />
 
 
     </LinearLayout>
@@ -180,10 +176,9 @@
     <Button
         android:id="@+id/dogHeatButton"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:text="HEAT"
         app:layout_constraintBottom_toBottomOf="@+id/dogPopUpPotrait"
-        app:layout_constraintTop_toBottomOf="@+id/ageDisplay"
         app:layout_constraintEnd_toEndOf="@+id/dogPopUpPotrait"
         app:layout_constraintStart_toEndOf="@+id/dogDeleteButton"
         android:visibility="invisible"
@@ -193,7 +188,8 @@
         android:id="@+id/dogDeleteButton"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:padding="1dp"
+        android:padding="10dp"
+        android:contentDescription="TODO"
         android:src="@android:drawable/ic_menu_delete"
         app:layout_constraintBottom_toBottomOf="@+id/dogUnitBackground"
         app:layout_constraintStart_toStartOf="@+id/dogUnitBackground"

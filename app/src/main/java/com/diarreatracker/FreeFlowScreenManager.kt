@@ -20,6 +20,7 @@ import com.example.diarreatracker.R
 
 class FreeFlowScreenManager(
     private val context: Context,
+    private val activity: MainActivity,
     private val zoomableLayout: FrameLayout,
     private val fileHandler: FileHandler, // Add FileHandler dependency
     private val scaleHolder: MainActivity.ScaleHolder,
@@ -31,7 +32,7 @@ class FreeFlowScreenManager(
     fun initialize() {
         val viewModel = ViewModelProvider(context as MainActivity)[DogSharedViewModel::class.java]
 
-        val dragTouchListener = DragTouchListener(zoomableLayout, 180, scaleHolder, viewModel, editPermission)
+        val dragTouchListener = DragTouchListener(activity,zoomableLayout, 180, scaleHolder, viewModel, editPermission)
         val dogViewDragTouchListener = DogViewDragTouchListener(dragTouchListener,zoomableLayout, 500, scaleHolder, editPermission, context)
         // Initialize ViewManager
         viewManager = ViewManager(zoomableLayout, fileHandler, dragTouchListener, dogViewDragTouchListener,scaleHolder, viewModel, context)

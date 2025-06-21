@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.diarreatracker.ui.component.DogRunSummary
 import com.diarreatracker.ui.component.TeambuilderDogElement
+import com.example.diarreatracker.R
 
 class TeamBuilderDogAdapter(
     private val items: List<DogRunSummary>,
@@ -35,6 +36,7 @@ class TeamBuilderDogAdapter(
             ellipsize = TextUtils.TruncateAt.END
             gravity = Gravity.CENTER
             textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+            setBackgroundResource(R.drawable.textview_background)
         }
         return ViewHolder(
             textView

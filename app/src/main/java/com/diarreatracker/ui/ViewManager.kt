@@ -70,8 +70,8 @@ class ViewManager(
         dogView.id = View.generateViewId()
 
         val layoutParams = ConstraintLayout.LayoutParams(
-            (400 * layout.resources.displayMetrics.density).toInt(),
-            (120 * layout.resources.displayMetrics.density).toInt()
+            (600 * layout.resources.displayMetrics.density).toInt(),
+            (180 * layout.resources.displayMetrics.density).toInt()
         )
 
         dogView.layoutParams = layoutParams
@@ -84,8 +84,10 @@ class ViewManager(
         dogView.findViewById<EditText>(R.id.ageDisplay).setText(dogItemView.dateOfBirth)
         dogView.findViewById<EditText>(R.id.sterilizationTextDisplay).setText(dogItemView.castrationText)
         dogView.findViewById<EditText>(R.id.bodyScoreDisplay).setText(dogItemView.bodyScore)
-        dogView.findViewById<ImageButton>(R.id.editDogButton).visibility = View.INVISIBLE
-        dogView.findViewById<ImageButton>(R.id.moveDogButton).visibility = View.INVISIBLE
+        dogView.findViewById<ImageButton>(R.id.editDogButton).visibility = View.GONE
+        dogView.findViewById<ImageButton>(R.id.moveDogButton).visibility = View.GONE
+        dogView.findViewById<ImageButton>(R.id.addRunDogButton).visibility = View.GONE
+        dogView.findViewById<ImageButton>(R.id.dogDeleteButton).visibility = View.GONE
 
         dogView.findViewById<EditText>(R.id.dogNameDisplay).isFocusable = false
         dogView.findViewById<EditText>(R.id.ageDisplay).isFocusable = false

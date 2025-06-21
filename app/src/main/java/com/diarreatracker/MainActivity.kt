@@ -8,7 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 import java.security.MessageDigest
 
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var zoomableLayout: FrameLayout
     private val fileHandler = FileHandler(this)
     private val threadHandler = Handler(Looper.getMainLooper())
@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ApiClient.initialize(this)
-        setFreeFlowScreen(true)
+        setTeamBuilderScreen(true)
     }
 
     inner class ScaleHolder{
@@ -85,7 +85,7 @@ class MainActivity : ComponentActivity() {
 
 
         // Initialize FreeFlowScreenManager
-        val freeFlowScreenManager = FreeFlowScreenManager(this, zoomableLayout, fileHandler, scaleHolder, permissionLevel)
+        val freeFlowScreenManager = FreeFlowScreenManager(this, this, zoomableLayout, fileHandler, scaleHolder, permissionLevel)
         freeFlowScreenManager.initialize()
     }
 

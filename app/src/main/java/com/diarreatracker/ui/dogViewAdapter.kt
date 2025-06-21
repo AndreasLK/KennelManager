@@ -1,6 +1,6 @@
 package com.diarreatracker.ui
 
-import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -22,7 +22,7 @@ import com.example.diarreatracker.R
 class dogViewAdapter(
     private val view: CustomTextView,
     private val viewModel: DogSharedViewModel,
-    private val popup: AlertDialog,
+    private val popup: Dialog,
     private val context: Context
     ): RecyclerView.Adapter<dogViewAdapter.ListViewHolder>()  {
 
@@ -49,6 +49,7 @@ class dogViewAdapter(
         private val moveButton: ImageButton = itemView.findViewById(R.id.moveDogButton)
         val background: ImageView = itemView.findViewById(R.id.dogUnitBackground)
         private val heatButton: Button = itemView.findViewById(R.id.dogHeatButton)
+        private val dogDeleteButton: ImageButton = itemView.findViewById(R.id.dogDeleteButton)
         private var isEditing = false
 
 
@@ -80,6 +81,8 @@ class dogViewAdapter(
             bodyScore.isFocusableInTouchMode = editable
             bodyScore.setTextColor(colors[editable.toInt()])
             heatButton.visibility = View.VISIBLE
+            dogDeleteButton.visibility = View.VISIBLE
+
 
             if (genderFemale.isVisible){
                 heatButton.text = "Heat"
@@ -95,6 +98,7 @@ class dogViewAdapter(
                 bodyScore.clearFocus()
                 editButton.backgroundTintList = ColorStateList.valueOf(Color.TRANSPARENT)
                 heatButton.visibility = View.INVISIBLE
+                dogDeleteButton.visibility = View.GONE
 
             }
         }
@@ -154,6 +158,11 @@ class dogViewAdapter(
             heatButton.setOnClickListener{
                 currentItem.heat = !currentItem.heat
                 background.imageTintList = heatClr(currentItem)
+                if(currentItem.gender){
+                    currentItem.castrationText
+                }
+
+
                 view.reload()
             }
 
