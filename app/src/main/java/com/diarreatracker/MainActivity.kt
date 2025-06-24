@@ -106,7 +106,14 @@ class MainActivity : AppCompatActivity() {
                     recyclerView.post {
                         val recyclerWidth = recyclerView.width
                         recyclerView.setHasFixedSize(false)
-                        recyclerView.adapter = TeamBuilderDogAdapter(dogs, recyclerWidth, numColumns, this@MainActivity, days )
+                        recyclerView.adapter = TeamBuilderDogAdapter(
+
+                            items = dogs.toMutableList(),
+                            recyclerWidth = recyclerWidth,
+                            columnCount = numColumns,
+                            context = this@MainActivity,
+                            days = days,
+                            onItemRemoved = {})
                         Log.d("Teambuilder", "Adapter set!")
 
                     }
