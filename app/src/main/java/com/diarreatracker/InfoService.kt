@@ -23,9 +23,12 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 import java.security.KeyStore
+import java.security.SecureRandom
 import java.security.cert.CertificateFactory
+import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManager
 import javax.net.ssl.TrustManagerFactory
 import javax.net.ssl.X509TrustManager
 
@@ -521,8 +524,8 @@ interface InfoService {
  */
 object ApiClient {
     // ─── CONFIGURATION: Point these to your FastAPI servers ───────────────────
-    private const val AUTH_BASE_URL = "https://192.168.10.154:4000"
-    private const val INFO_BASE_URL = "https://192.168.10.154:8002"
+    private const val AUTH_BASE_URL = "https://192.168.174.55:4000"
+    private const val INFO_BASE_URL = "https://192.168.174.55:8002"
 
     @Volatile
     private var jwtToken: String? = null
@@ -579,13 +582,14 @@ object ApiClient {
         return builder.build()
     }
 
+
     /** Call this early like in Application class or Splash Screen */
     fun initialize(context: Context) {
         if (!::authService.isInitialized) {
             val retrofitAuth = Retrofit.Builder()
                 .baseUrl(AUTH_BASE_URL)
                 .addConverterFactory(json.asConverterFactory(contentTypeJson))
-                .client(getCustomOkHttpClient(context)) // Without authInterceptor
+                .client(getCustomOkHttpClient(context))
                 .build()
 
             authService = retrofitAuth.create(AuthService::class.java)
