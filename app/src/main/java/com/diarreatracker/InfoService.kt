@@ -103,7 +103,8 @@ data class RunCountResponse(
     @SerialName("dog_name") val dogName: Int,
     @SerialName("days") val days: Int,
     @SerialName("run_count") val runCount: Int,
-    @SerialName("total_distance") val totalDistance: Int
+    @SerialName("total_distance") val totalDistance: Int,
+    @SerialName("days_off") val daysOff: Int
 )
 
 @Serializable
