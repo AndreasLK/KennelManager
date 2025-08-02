@@ -524,8 +524,8 @@ interface InfoService {
  */
 object ApiClient {
     // ─── CONFIGURATION: Point these to your FastAPI servers ───────────────────
-    private const val AUTH_BASE_URL = "https://192.168.174.55:4000"
-    private const val INFO_BASE_URL = "https://192.168.174.55:8002"
+    private const val AUTH_BASE_URL = "https://192.168.1.184:4000"
+    private const val INFO_BASE_URL = "https://192.168.1.184:8002"
 
     @Volatile
     private var jwtToken: String? = null
